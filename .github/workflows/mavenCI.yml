@@ -38,6 +38,6 @@ jobs:
       with:
         java-version: 1.8
     - name: artifact on GitHub Packages
-      run: mvn -B clean deply -DskipTests
+      run: mvn -B clean deploy -DskipTests -Dregistry=https://maven.pkg.github.com/BME-MIT-IET -Dtoken=GH_TOKEN
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
