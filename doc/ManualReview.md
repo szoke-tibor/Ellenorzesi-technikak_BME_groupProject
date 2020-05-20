@@ -18,7 +18,7 @@
         ```
 
         * Az exceptiont ugyan létrehozták, de a throw kulcsóval nem kerül eldobásra sosem.
-    * Arra is látható példa hogy ugyanazt a TODO kommentet több helyre is bemásolták.
+    * Arra is látható példa, hogy ugyanazt a TODO kommentet több helyre is bemásolták.
 
         ```java
         if (id.startsWith("http:")) {
@@ -36,14 +36,14 @@
         }
         ```
 
-        * Ez a feleslegesen növeli a kódsorok számát, túlságosan redundáns információ és rontja az olvashatóságot.
+        * Ez feleslegesen növeli a kódsorok számát, túlságosan redundáns információ és rontja az olvashatóságot.
         * Elegendő lenne egyszer jelezni az elvégzendő feladatot a kódrészlet elején.
 
-* **Hosszú függvény nevek:** Más tárgyakból tanultuk, hogy a függvények elnevezése során törekedjünk legjobban leírni a funkcióját, de közben kerüljük el a már-már túl hosszú neveket. Továbbá nem érdemes sok függvényt hasonlóan elnevezni, mert ha csak egy-egy szóban térnek el, akkor nehéz lehet őket megkülönböztetni egymástól.
+* **Hosszú függvénynevek:** Más tárgyakból tanultuk, hogy a függvények elnevezése során törekedjünk legjobban leírni a funkcióját, de közben kerüljük el a már-már túl hosszú neveket. Továbbá nem érdemes sok függvényt hasonlóan elnevezni, mert ha csak egy-egy szóban térnek el, akkor nehéz lehet őket megkülönböztetni egymástól.
 
     * A `UseOfNonSimplePropertyInAsymmetricObjectPropertyAxiom()` és a `UseOfNonSimplePropertyInInverseFunctionalObjectPropertyAxiom()` hosszú névvel rendelkeznek és nehéz őket megkülönböztetni.
     
-* **Hosszú paraméterlista:** Clean Code elveknél tanultuk, hogy nem ajánlott 3-nál több paraméter használata, mert ezek csökkentik a könnyű használhatóságát és nehéz észbentartani, hogy vajon mit kell írni a 6. paraméter helyére.
+* **Hosszú paraméterlista:** Clean Code elveknél tanultuk, hogy nem ajánlott 3-nál több paraméter használata, mert ezek csökkentik a könnyű használhatóságát és nehéz észben tartani, hogy vajon mit kell írni a 6. paraméter helyére.
 
     *  Például: `translateNegativeDataPropertyAssertion(IRI s, IRI p, IRI o, IRI source, IRI property, OWLLiteral target, Set<OWLAnnotation> annos)`
 
@@ -61,7 +61,7 @@
         public abstract class AbstractTranslator<N extends Serializable, R extends N, P extends N, L extends N>
         ```
 
-* **Zavaros java doc:** A javadoc azt lenne hivatott szolgálni, hogy aki olvassa a kódot könnyedén megértse például egy függvény működését aztálal, hogy elolvassa a javadoc-ban szereplő információkat (függvény viselkedésének, paraméterek és a visszatérési érték magyarázata).
+* **Zavaros javadoc:** A javadoc azt lenne hivatott szolgálni, hogy aki olvassa a kódot könnyedén megértse például egy függvény működését azáltal, hogy elolvassa a javadoc-ban szereplő információkat (függvény viselkedésének, paraméterek és a visszatérési érték magyarázata).
 
     ```java
     /**
@@ -74,7 +74,7 @@
     ```
     
     * Látható, hogy a függvény viselkedésének lényege egy integer változó kinyerése, azt azonban nem tudjuk meg, hogy milyen érték ez.
-    * A hosszabb és gyakran ismétlődő szavak rövidítése ugyan hasznos lehet például a pataméternevek megválasztása során, azonban erősen ajánlott elkerülni azt a dokumentáció írása során.
+    * A hosszabb és gyakran ismétlődő szavak rövidítése ugyan hasznos lehet például a paraméternevek megválasztása során, azonban erősen ajánlott elkerülni azt a dokumentáció írása során.
         * Jelen esetben például a javadoc-ból nem tudjuk meg, hogy a qV minek a rövidítése.
     * A q nevű paraméterről például nem tudjuk meg, hogy milyen célt szolgál, ugyanis a "q the q" magyarázat lényegében semmit sem ad hozzá az olvasó által olvasott kód megértéséhez.
     * Ugyanez elmondható a "quals the quals" sorról is.

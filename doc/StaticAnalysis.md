@@ -1,21 +1,21 @@
 # Statikus analízis eszköz futtatása és jelzett hibák átnézése (SonarQube, SpotBugs, VS Code Analyzer, Codacy, Coverity Scan...)
 
-### Általunk használt eszközök:
-* SonarCloud: A program működét sajnos nagy erőfeszítések ellenére sem sikerült elérni még külső segítséggel sem. A buildelés sikertelen volt és az alábbi hibakódot kaptuk:
+## Általunk használt eszközök:
+* **SonarCloud:** A program működét sajnos nagy erőfeszítések ellenére sem sikerült elérni még külső segítséggel sem. A buildelés sikertelen volt és az alábbi hibakódot kaptuk:
 
     ![](images/sonarCloud_error.png)
     * A hibák megoldásának folyamatát a feladathoz tartozó issue-nál lehet nyomon követni.
 
-* SonarQube: A legtöbb hibát ez alapján sikerült detektálnunk.
+* **SonarQube:** A legtöbb hibát ez alapján sikerült detektálnunk.
 
     ![](images/sonarqube.png)
 
-* SpotBugs: Kipróbáltuk ezt is, viszont ez sajnos elakadt, így nem futott le a teljes ellenőrzés:
+* **SpotBugs:** Kipróbáltuk ezt is, viszont ez sajnos elakadt, így nem futott le a teljes ellenőrzés:
 
     ![](images/spotbugs.png)
 
 
-### Statikus analízis eszközökkel talált hibák:
+## Statikus analízis eszközökkel talált hibák:
 
 * **Felesleges feltétel a ciklusban:** Olyan feltételt adtak meg, ami mindig true-ra vagy false-ra értékelődik ki.
 
