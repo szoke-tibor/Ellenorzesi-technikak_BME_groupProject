@@ -18,6 +18,7 @@
         ```
 
         * Az exceptiont ugyan létrehozták, de a throw kulcsóval nem kerül eldobásra sosem.
+        
     * Arra is látható példa, hogy ugyanazt a TODO kommentet több helyre is bemásolták.
 
         ```java

@@ -1517,17 +1517,14 @@ public class OWLAPIObo2Owl {
             throw new OWLParserException("spaces not allowed: '" + id + '\'');
         }
         // No conversion is required if this is already an IRI (ID-as-URI rule)
+        // TODO - roundtrip from other schemes
         if (id.startsWith("http:")) {
-            // TODO - roundtrip from other schemes
             return IRI.create(id);
         } else if (id.startsWith("https:")) {
-            // TODO - roundtrip from other schemes
             return IRI.create(id);
         } else if (id.startsWith("ftp:")) {
-            // TODO - roundtrip from other schemes
             return IRI.create(id);
         } else if (id.startsWith("urn:")) {
-            // TODO - roundtrip from other schemes
             return IRI.create(id);
         }
         // TODO - treat_xrefs_as_equivalent
