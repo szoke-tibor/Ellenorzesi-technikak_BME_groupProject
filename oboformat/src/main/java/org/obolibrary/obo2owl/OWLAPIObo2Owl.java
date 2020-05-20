@@ -1065,68 +1065,82 @@ public class OWLAPIObo2Owl {
         assert v != null;
         Set<OWLAnnotation> annotations = trAnnotations(clause);
         OboFormatTag tagConstant = OBOFormatConstants.getTag(tag);
-        if (tagConstant == OboFormatTag.TAG_IS_A) {
-            ax = fac.getOWLSubObjectPropertyOfAxiom(p, trObjectProp((String) v), annotations);
-        } else if (tagConstant == OboFormatTag.TAG_RELATIONSHIP) {
+        switch (tagConstant) {
+            case TAG_IS_A:
+                ax = fac.getOWLSubObjectPropertyOfAxiom(p, trObjectProp((String) v), annotations);
+                break;
+            case TAG_RELATIONSHIP:
             IRI relId = oboIdToIRI((String) v);
             OWLAnnotationProperty metaProp = typedefToAnnotationProperty.get(relId.toString());
             if (metaProp != null) {
                 ax = fac.getOWLAnnotationAssertionAxiom(metaProp, p.getIRI(),
                     oboIdToIRI((String) clause.getValue2()), annotations);
             }
-        } else if (tagConstant == OboFormatTag.TAG_DISJOINT_FROM) {
-            Set<OWLObjectPropertyExpression> cSet = new HashSet<>();
-            cSet.add(p);
-            cSet.add(trObjectProp((String) v));
-            ax = fac.getOWLDisjointObjectPropertiesAxiom(cSet, annotations);
-        } else if (tagConstant == OboFormatTag.TAG_INVERSE_OF) {
-            ax = fac.getOWLInverseObjectPropertiesAxiom(p, trObjectProp((String) v), annotations);
-        } else if (tagConstant == OboFormatTag.TAG_EQUIVALENT_TO) {
-            Set<OWLObjectPropertyExpression> cSet = new HashSet<>();
-            cSet.add(p);
-            cSet.add(trObjectProp((String) v));
-            ax = fac.getOWLEquivalentObjectPropertiesAxiom(cSet, annotations);
-        } else if (tagConstant == OboFormatTag.TAG_DOMAIN) {
-            ax = fac.getOWLObjectPropertyDomainAxiom(p, trClass(v), annotations);
-        } else if (tagConstant == OboFormatTag.TAG_RANGE) {
-            ax = fac.getOWLObjectPropertyRangeAxiom(p, trClass(v), annotations);
-        } else if (tagConstant == OboFormatTag.TAG_TRANSITIVE_OVER) {
-            List<OWLObjectPropertyExpression> chain = new ArrayList<>(2);
-            chain.add(p);
-            chain.add(trObjectProp(v));
-            ax = fac.getOWLSubPropertyChainOfAxiom(chain, p, annotations);
-        } else if (tagConstant == OboFormatTag.TAG_HOLDS_OVER_CHAIN
-            || tagConstant == OboFormatTag.TAG_EQUIVALENT_TO_CHAIN) {
-            if (tagConstant == OboFormatTag.TAG_EQUIVALENT_TO_CHAIN) {
+                break;
+            case TAG_DISJOINT_FROM:
+                Set<OWLObjectPropertyExpression> cSet = new HashSet<>();
+                cSet.add(p);
+                cSet.add(trObjectProp((String) v));
+                ax = fac.getOWLDisjointObjectPropertiesAxiom(cSet, annotations);
+                break;
+            case TAG_INVERSE_OF:
+                ax = fac.getOWLInverseObjectPropertiesAxiom(p, trObjectProp((String) v), annotations);
+                break;
+            case TAG_EQUIVALENT_TO:
+                Set<OWLObjectPropertyExpression> cSet2 = new HashSet<>();
+                cSet2.add(p);
+                cSet2.add(trObjectProp((String) v));
+                ax = fac.getOWLEquivalentObjectPropertiesAxiom(cSet2, annotations);
+                break;
+            case TAG_DOMAIN:
+                ax = fac.getOWLObjectPropertyDomainAxiom(p, trClass(v), annotations);
+                break;
+            case TAG_RANGE:
+                ax = fac.getOWLObjectPropertyRangeAxiom(p, trClass(v), annotations);
+                break;
+            case TAG_TRANSITIVE_OVER:
+                List<OWLObjectPropertyExpression> chain = new ArrayList<>(2);
+                chain.add(p);
+                chain.add(trObjectProp(v));
+                ax = fac.getOWLSubPropertyChainOfAxiom(chain, p, annotations);
+                break;
+            case TAG_EQUIVALENT_TO_CHAIN:
                 OWLAnnotation ann = fac.getOWLAnnotation(
-                    trAnnotationProp(IRI_PROP_ISREVERSIBLEPROPERTYCHAIN), trLiteral(TRUE));
+                trAnnotationProp(IRI_PROP_ISREVERSIBLEPROPERTYCHAIN), trLiteral(TRUE));
                 annotations.add(ann);
-            }
-            List<OWLObjectPropertyExpression> chain = new ArrayList<>();
-            chain.add(trObjectProp(v));
-            chain.add(trObjectProp(clause.getValue2()));
-            ax = fac.getOWLSubPropertyChainOfAxiom(chain, p, annotations);
-            // TODO - annotations for equivalent to
-        } else if (tagConstant == OboFormatTag.TAG_IS_TRANSITIVE
-            && TRUE.equals(clause.getValue().toString())) {
-            ax = fac.getOWLTransitiveObjectPropertyAxiom(p, annotations);
-        } else if (tagConstant == OboFormatTag.TAG_IS_REFLEXIVE
-            && TRUE.equals(clause.getValue().toString())) {
-            ax = fac.getOWLReflexiveObjectPropertyAxiom(p, annotations);
-        } else if (tagConstant == OboFormatTag.TAG_IS_SYMMETRIC
-            && TRUE.equals(clause.getValue().toString())) {
-            ax = fac.getOWLSymmetricObjectPropertyAxiom(p, annotations);
-        } else if (tagConstant == OboFormatTag.TAG_IS_ASYMMETRIC
-            && TRUE.equals(clause.getValue().toString())) {
-            ax = fac.getOWLAsymmetricObjectPropertyAxiom(p, annotations);
-        } else if (tagConstant == OboFormatTag.TAG_IS_FUNCTIONAL
-            && TRUE.equals(clause.getValue().toString())) {
-            ax = fac.getOWLFunctionalObjectPropertyAxiom(p, annotations);
-        } else if (tagConstant == OboFormatTag.TAG_IS_INVERSE_FUNCTIONAL
-            && TRUE.equals(clause.getValue().toString())) {
-            ax = fac.getOWLInverseFunctionalObjectPropertyAxiom(p, annotations);
-        } else {
-            return trGenericClause(p, tag, clause);
+                break;
+            case TAG_HOLDS_OVER_CHAIN:
+                List<OWLObjectPropertyExpression> chain2 = new ArrayList<>();
+                chain2.add(trObjectProp(v));
+                chain2.add(trObjectProp(clause.getValue2()));
+                ax = fac.getOWLSubPropertyChainOfAxiom(chain2, p, annotations);
+                break;
+            case TAG_IS_TRANSITIVE:
+                if (TRUE.equals(clause.getValue().toString()))
+                    ax = fac.getOWLTransitiveObjectPropertyAxiom(p, annotations);
+                break;
+            case TAG_IS_REFLEXIVE:
+                if (TRUE.equals(clause.getValue().toString()))
+                    ax = fac.getOWLReflexiveObjectPropertyAxiom(p, annotations);
+                break;
+            case TAG_IS_SYMMETRIC:
+                if (TRUE.equals(clause.getValue().toString())) 
+                    ax = fac.getOWLSymmetricObjectPropertyAxiom(p, annotations);
+                break;
+            case TAG_IS_ASYMMETRIC:
+                if (TRUE.equals(clause.getValue().toString())) 
+                    ax = fac.getOWLAsymmetricObjectPropertyAxiom(p, annotations);
+                break;
+            case TAG_IS_FUNCTIONAL:
+                if (TRUE.equals(clause.getValue().toString())) 
+                    ax = fac.getOWLFunctionalObjectPropertyAxiom(p, annotations);
+                break;
+            case TAG_IS_INVERSE_FUNCTIONAL:
+                if (TRUE.equals(clause.getValue().toString()))
+                    ax = fac.getOWLInverseFunctionalObjectPropertyAxiom(p, annotations);
+                break;
+            default:
+                return trGenericClause(p, tag, clause);
         }
         // TODO - disjointOver
         return ax;
