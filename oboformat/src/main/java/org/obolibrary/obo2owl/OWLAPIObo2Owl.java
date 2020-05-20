@@ -1070,12 +1070,12 @@ public class OWLAPIObo2Owl {
                 ax = fac.getOWLSubObjectPropertyOfAxiom(p, trObjectProp((String) v), annotations);
                 break;
             case TAG_RELATIONSHIP:
-            IRI relId = oboIdToIRI((String) v);
-            OWLAnnotationProperty metaProp = typedefToAnnotationProperty.get(relId.toString());
-            if (metaProp != null) {
-                ax = fac.getOWLAnnotationAssertionAxiom(metaProp, p.getIRI(),
-                    oboIdToIRI((String) clause.getValue2()), annotations);
-            }
+                IRI relId = oboIdToIRI((String) v);
+                OWLAnnotationProperty metaProp = typedefToAnnotationProperty.get(relId.toString());
+                if (metaProp != null) {
+                    ax = fac.getOWLAnnotationAssertionAxiom(metaProp, p.getIRI(),
+                        oboIdToIRI((String) clause.getValue2()), annotations);
+                }
                 break;
             case TAG_DISJOINT_FROM:
                 Set<OWLObjectPropertyExpression> cSet = new HashSet<>();
@@ -1108,12 +1108,16 @@ public class OWLAPIObo2Owl {
                 OWLAnnotation ann = fac.getOWLAnnotation(
                 trAnnotationProp(IRI_PROP_ISREVERSIBLEPROPERTYCHAIN), trLiteral(TRUE));
                 annotations.add(ann);
-                break;
-            case TAG_HOLDS_OVER_CHAIN:
                 List<OWLObjectPropertyExpression> chain2 = new ArrayList<>();
                 chain2.add(trObjectProp(v));
                 chain2.add(trObjectProp(clause.getValue2()));
                 ax = fac.getOWLSubPropertyChainOfAxiom(chain2, p, annotations);
+                break;
+            case TAG_HOLDS_OVER_CHAIN:
+                List<OWLObjectPropertyExpression> chain3 = new ArrayList<>();
+                chain3.add(trObjectProp(v));
+                chain3.add(trObjectProp(clause.getValue2()));
+                ax = fac.getOWLSubPropertyChainOfAxiom(chain3, p, annotations);
                 break;
             case TAG_IS_TRANSITIVE:
                 if (TRUE.equals(clause.getValue().toString()))
