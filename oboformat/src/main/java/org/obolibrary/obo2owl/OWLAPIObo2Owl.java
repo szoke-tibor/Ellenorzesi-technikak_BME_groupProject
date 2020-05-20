@@ -287,11 +287,11 @@ public class OWLAPIObo2Owl {
     }
 
     /**
-     * Gets the qV string.
+     * Gets the string QualifierValue
      *
-     * @param q the q
-     * @param quals the quals
-     * @return the qV string
+     * @param q the qualifier
+     * @param quals the collection of QualifierValues
+     * @return the string QualifierValue
      */
     protected static String getQVString(String q, Collection<QualifierValue> quals) {
         for (QualifierValue qv : quals) {
