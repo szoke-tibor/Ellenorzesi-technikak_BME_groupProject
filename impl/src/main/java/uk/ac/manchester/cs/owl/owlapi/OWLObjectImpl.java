@@ -19,10 +19,7 @@ import static org.semanticweb.owlapi.util.OWLAPIStreamUtils.equalStreams;
 import static org.semanticweb.owlapi.util.OWLAPIStreamUtils.streamFromSorted;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -93,7 +90,7 @@ public abstract class OWLObjectImpl
 
     @Override
     public boolean containsEntityInSignature(OWLEntity owlEntity) {
-        return signatures.get(this).contains(owlEntity);
+        return Objects.requireNonNull(signatures.get(this)).contains(owlEntity);
     }
 
     @Override
