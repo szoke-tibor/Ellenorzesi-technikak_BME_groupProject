@@ -91,7 +91,7 @@ public abstract class OWLDocumentFormatFactoryImpl implements OWLDocumentFormatF
             if (mimeType.equalsIgnoreCase(nextMimeType)) {
                 return true;
             }
-            if (mimeType != type && type.equalsIgnoreCase(nextMimeType)) {
+            if (!mimeType.equals(type) && type.equalsIgnoreCase(nextMimeType)) {
                 return true;
             }
         }

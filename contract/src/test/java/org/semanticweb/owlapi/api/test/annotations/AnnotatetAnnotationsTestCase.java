@@ -105,15 +105,15 @@ public class AnnotatetAnnotationsTestCase extends TestBase {
 
     @Test
     public void shouldRecognizeAnnotationsOnAxiomsWithDifferentannotationsAsDistinct() {
-        OWLAnnotationProperty p = AnnotationProperty(iri("p"));
-        OWLAnnotationSubject i = iri("i");
-        OWLLiteral v = Literal("value");
+        OWLAnnotationProperty property = AnnotationProperty(iri("p"));
+        OWLAnnotationSubject subject = iri("i");
+        OWLLiteral value = Literal("value");
         OWLLiteral ann1 = Literal("value1");
         OWLLiteral ann2 = Literal("value2");
         OWLAnnotationAssertionAxiom ax1 =
-            AnnotationAssertion(p, i, v, singleton(Annotation(RDFSLabel(), ann1)));
+            AnnotationAssertion(property, subject, value, singleton(Annotation(RDFSLabel(), ann1)));
         OWLAnnotationAssertionAxiom ax2 =
-            AnnotationAssertion(p, i, v, singleton(Annotation(RDFSLabel(), ann2)));
+            AnnotationAssertion(property, subject, value, singleton(Annotation(RDFSLabel(), ann2)));
         Set<OWLAnnotationAssertionAxiom> set = new TreeSet<>();
         set.add(ax1);
         set.add(ax2);

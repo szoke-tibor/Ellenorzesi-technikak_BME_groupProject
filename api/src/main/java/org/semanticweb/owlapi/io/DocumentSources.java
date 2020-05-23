@@ -317,17 +317,7 @@ public class DocumentSources {
             return new BufferedInputStream(new XZInputStream(in));
         }
         if (isZipFileName(fileName)) {
-            ZipInputStream zis = new ZipInputStream(in);
-            ZipEntry entry = null;
-            ZipEntry nextEntry = zis.getNextEntry();
-            // XXX is this a bug?
-            while (entry != null && nextEntry != null) {
-                if (couldBeOntology(nextEntry)) {
-                    entry = nextEntry;
-                }
-                nextEntry = zis.getNextEntry();
-            }
-            return zis;
+            return new ZipInputStream(in);
         }
         return in;
 
