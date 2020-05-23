@@ -23,7 +23,7 @@
     ZipEntry entry = null;
     ZipEntry nextEntry = zis.getNextEntry();
     while (entry != null && nextEntry != null) {
-        ...
+        ...  //itt sem változtat érdemlegeset a feltételen
     }
     ```
 
