@@ -22,4 +22,4 @@
 > 
   > Az artifact-ot GitHub Package-be publikáljuk, amennyiben a tesztek helyesen lefutottak.
   > (Többféleképpen is megpróbáltam publikálni github package-be, de nem sikerült, valószínűleg projekt build hiba miatt).
-  > ![publish error](cloud_error)
+  > ![publish error](images/cloud_error.png)
