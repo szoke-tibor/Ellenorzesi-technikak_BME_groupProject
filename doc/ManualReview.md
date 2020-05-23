@@ -94,7 +94,7 @@
     * Itt is látható néhány fent leírt súlyos hiba.
     * Ráadásul itt még a visszatérési érték leírása is teljesen értelmetlen. Látszik, hogy a dokumentálást rendkívüli módon félvállról vette a fejlesztő, ez által a későbbi fejlesztő munkáját és a kód karbantarthatóságát szignifikánsan megnehezítve.
 
-* **Struktúrálatlan kód:** Kódírás során rendkívül fontos, hogy ne csak a funkcionalitást és a hatékonyságot tartsuk szemelőtt, hanem a kód olvashatóságát is a kód későbbi karbantarthatósága miatt.
+* **Struktúrálatlan kód:** Kódírás során rendkívül fontos, hogy ne csak a funkcionalitást és a hatékonyságot tartsuk szem előtt, hanem a kód olvashatóságát is a kód későbbi karbantarthatósága miatt.
 
     * Például: a `trTypedefClause` nevű függvény törzsében található egy 16 ágú if-else szerkezet, mely rendkívül átláthatatlanná teszi a kódot. Switch szerkezettel sokkal tisztább képet alkotna a kód.
     * Szintén a `trTypedefClause` nevű függvényben az említett nagy méretű if-else szerkezeten belül található az alábbi kód:
