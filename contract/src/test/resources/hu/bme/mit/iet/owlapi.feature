@@ -10,9 +10,9 @@ Feature: Ontology operations
   Scenario: Add and remove axiom
     Given Create a fresh ontology manager to handle ontologies
     When Load the http://home.mit.bme.hu/~fandrew/integralt/szepmuveszeti-dbpedia.2017-03-10.owl ontology
-    And Add Agent subclass to the Person class
+    And Add Agent as subclass to the Person class
     Then Ontology has 1697 axioms
-    When Remove Agent subclass from the Person class
+    When Remove Agent as subclass from the Person class
     Then Ontology has 1696 axioms
 
   Scenario: Merge two ontology
@@ -21,7 +21,7 @@ Feature: Ontology operations
     And Merge ontology with http://home.mit.bme.hu/~fandrew/iir/pc_shop.owl ontology
     Then Merged ontology has 1804 axioms
 
-  Scenario Outline: Adding a new class with disjoint axoim then removing it
+  Scenario Outline: Adding a new class with disjoint axiom then removing it
     Given Create a fresh ontology manager to handle ontologies
     When Load the http://home.mit.bme.hu/~fandrew/iir/pc_shop.owl ontology
     Then Ontology has 107 axioms

@@ -46,7 +46,7 @@ public class CucumberStepDefinitions {
         mergedOntology = merger.createMergedOntology(manager, mergedOntologyIRI);
     }
 
-    @When("^Add (.*) subclass to the (.*) class$")
+    @When("^Add (.*) as subclass to the (.*) class$")
     public void addSubclassAxiom(String subclass, String superclass) {
         OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
         OWLClass classAgent = df.getOWLClass(IOR + "#", subclass);
@@ -56,7 +56,7 @@ public class CucumberStepDefinitions {
         manager.applyChange(addAxiom);
     }
 
-    @When("^Remove (.*) subclass from the (.*) class$")
+    @When("^Remove (.*) as subclass from the (.*) class$")
     public void removeSubclassAxiom(String subclass, String superclass) {
         OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
         OWLClass classAgent = df.getOWLClass(IOR + "#", subclass);
