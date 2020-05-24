@@ -5,6 +5,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.util.OWLOntologyMerger;
 
 import java.util.Objects;
 
@@ -17,6 +18,9 @@ public class CucumberStepDefinitions {
     OWLOntologyManager manager;
     OWLOntology ontology;
     IRI IOR;
+    OWLOntology ontology2;
+    IRI IOR2;
+    OWLOntology mergedOntology;
 
     @Given("^Create a fresh ontology manager to handle ontologies$")
     public void createOntologyManager() {
@@ -27,6 +31,17 @@ public class CucumberStepDefinitions {
     public void loadOntologyFromUrl(String url) throws Throwable {
         ontology = manager.loadOntology(IRI.create(url));
         IOR = IRI.create("http://home.mit.bme.hu/~fandrew/integralt/szepmuveszeti-dbpedia.2017-03-10.owl");
+    }
+
+    @When("^Merge ontology with (.*) ontology$")
+    public void mergeOntologies(String url) throws Throwable {
+        ontology2 = manager.loadOntology(IRI.create(url));
+        IOR2 = IRI.create(url);
+        OWLDataFactory df = ontology.getOWLOntologyManager().getOWLDataFactory();
+        manager.addAxiom(ontology2, df.getOWLDeclarationAxiom(df.getOWLClass(IOR2)));
+        OWLOntologyMerger merger = new OWLOntologyMerger(manager);
+        IRI mergedOntologyIRI = IRI.create("http://home.mit.bme.hu", "newOntology");
+        mergedOntology = merger.createMergedOntology(manager, mergedOntologyIRI);
     }
 
     @When("^Add (.*) subclass to the (.*) class$")
@@ -47,6 +62,11 @@ public class CucumberStepDefinitions {
         OWLAxiom axiom = df.getOWLSubClassOfAxiom(classAgent, classPerson);
         RemoveAxiom removeAxiom = new RemoveAxiom(ontology, axiom);
         manager.applyChange(removeAxiom);
+    }
+
+    @Then("^Merged ontology has (\\d+) axioms$")
+    public void mergedHasAxioms(int axiomsCount) {
+        assertThat(mergedOntology.getAxiomCount(), equalTo(axiomsCount));
     }
 
     @Then("^Ontology has (\\d+) axioms$")
