@@ -28,6 +28,6 @@ A kettő tesztet egy általunk (java) nyelven írt programban teszteltük, ahol 
 
 * **Nagy ontológiát használva (nem véletlenszerű szavakkal):**
        
-    ![](images/littleOntology.PNG)
+    ![](images/veryBigOntology.png)
 
     **Következtetés:** Itt már látszódik, hogy exponenciálisan növekszik a betöltési idő, azonban az itt tapasztalható sebesség növekedés csak annak tudható be, hogy itt kisebb az overhead a a program futtatása, a véletlenszerű szavak generálása és kiolvasása miatt. Innen látszódik, hogy a program nincsen felkészítve a hatalmas (100 MB-nél nagyobb) file-ok kezelésére (például többszálú folyamatokkal és egyéb teljesítménygyorsító megoldásokkal). Ezeket a későbbiekben javítani lehet, azonban megjegyzendő, hogy még itt sem fagyott le illetve crash-elt el a program. 
