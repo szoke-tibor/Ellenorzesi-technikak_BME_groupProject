@@ -14,7 +14,7 @@ A kettő tesztet egy általunk (java) nyelven írt programban teszteltük, ahol 
 ## A tesztelt esetek:
 * **Kis ontológiát használva (nem véletlenszerű szavakkal):**
 
-    ![](images/verylittleOntology.PNG)
+    ![](images/veryLittleOntology.PNG)
 
     **Következtetés:** Látható, hogy kis ontológiát használva gyors a betöltési idő továbbá a keresési idő is alacsony.
     A véletlenszerű szavakkal végzett tesztelés itt nem mutatott nagy eltérést, mivel nem volt 100 szó az ontológiában, így, hogy a tesztesetek hasonló körülményekkel legyenek lefolytatva, mellégeneráltunk további véletlenszerű szavakat.
