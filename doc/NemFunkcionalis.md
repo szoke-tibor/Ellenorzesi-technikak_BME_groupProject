@@ -4,12 +4,12 @@
 * **Stressz teszt**
 * **Teljesítmény teszt**
 # A tesztek megvalósítása
-A kettő tesztet egy általunk (java) nyelven írt programban teszteltük, ahol a következő események hatására adott válaszokat vizsgáltuk:
+A kettő tesztet egy általunk (Java nyelven) írt programban teszteltük, ahol a következő események hatására adott válaszokat vizsgáltuk:
 * ontológiák betöltésének ideje az ontológiák méretétől függően
 * ontológiák feldolgozásának ideje a mérettől függően
-* a keresés ideje az ontológia méretétől függően (keresés véletlenszerű szavakkkal és az ontológiában megtalálható szavakkal is)
+* a keresés ideje az ontológia méretétől függően (keresés véletlenszerű szavakkal és az ontológiában megtalálható szavakkal is)
     
-    Mindezen tesztek alatt a háttérben figyeltük a memóri illetve a CPU kihasználtságot, azonban itt sajnos jelentős eltérés nem volt tapasztalható a fordítókörnyezet alap CPU illetve memóriakihasználtsága miatt, ezért ezeket képernyőképeket kihag
+    Mindezen tesztek alatt a háttérben figyeltük a memória, illetve a CPU kihasználtságot, azonban itt sajnos jelentős eltérés nem volt tapasztalható a fordítókörnyezet alap CPU, illetve memóriakihasználtsága miatt, ezért ezeket képernyőképeket kihagytuk
 
 ## A tesztelt esetek:
 * **Kis ontológiát használva (nem véletlenszerű szavakkal):**
@@ -24,10 +24,10 @@ A kettő tesztet egy általunk (java) nyelven írt programban teszteltük, ahol 
     ![](images/littleOntology.PNG)
 
     **Következtetés:** Itt már növekszik a feldolgozási illetve keresési idő is. Azonban mint látható még nem kapunk nagy eltérést az előző teszthez képest.
-    Itt a véletlenszerű tesztesteknél már nagy különbség tapasztalható, mivel itt már megfelelő mennyiségű adat áll rendelkezésre, ahhoz hogy 100 ontológiával is tudjuk tesztelni az adott tesztesetet.
+    Itt a véletlenszerű tesztesteknél már nagy különbség tapasztalható, mivel itt már megfelelő mennyiségű adat áll rendelkezésre, ahhoz hogy 100 szóval is tudjuk tesztelni az adott ontológiát.
 
 * **Nagy ontológiát használva (nem véletlenszerű szavakkal):**
        
     ![](images/veryBigOntology.png)
 
-    **Következtetés:** Itt már látszódik, hogy exponenciálisan növekszik a betöltési idő, azonban az itt tapasztalható sebesség növekedés csak annak tudható be, hogy itt kisebb az overhead a a program futtatása, a véletlenszerű szavak generálása és kiolvasása miatt. Innen látszódik, hogy a program nincsen felkészítve a hatalmas (100 MB-nél nagyobb) file-ok kezelésére (például többszálú folyamatokkal és egyéb teljesítménygyorsító megoldásokkal). Ezeket a későbbiekben javítani lehet, azonban megjegyzendő, hogy még itt sem fagyott le illetve crash-elt el a program. 
+    **Következtetés:** Itt már látszódik, hogy exponenciálisan növekszik a betöltési idő, azonban az itt tapasztalható sebességnövekedés csak annak tudható be, hogy itt kisebb az overhead a a program futtatása, a véletlenszerű szavak generálása és kiolvasása miatt. Innen látszódik, hogy a program nincsen felkészítve a hatalmas (100 MB-nél nagyobb) file-ok kezelésére (például többszálú folyamatokkal és egyéb teljesítménygyorsító megoldásokkal). Ezeket a későbbiekben javítani lehet, azonban megjegyzendő, hogy még itt sem fagyott le illetve crash-elt el a program. 
