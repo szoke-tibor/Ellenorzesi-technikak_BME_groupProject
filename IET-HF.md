@@ -29,7 +29,7 @@ Az OWLAPI egy rendkívül komplex és sokrétű alkalmazás. Legfőképpen ontol
 ### Termék/felhasználó fókusz
 
 - [Nem-funkcionális jellemzők vizsgálata (teljesítmény, stresszteszt, biztonság, használhatóság...)](/doc/NemFunkcionalis.md)
-- [BDD tesztek készítése (Cucumber, Specflow...)](/doc)
+- [BDD tesztek készítése (Cucumber, Specflow...)](/doc/BDD (Cucumber).md)
 
 ## Elsajátított ismeretek:
 
