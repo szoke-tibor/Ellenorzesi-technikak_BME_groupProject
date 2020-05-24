@@ -5,9 +5,11 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.util.OWLEntityRemover;
 import org.semanticweb.owlapi.util.OWLOntologyMerger;
 
 import java.util.Objects;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -30,7 +32,7 @@ public class CucumberStepDefinitions {
     @When("^Load the (.*) ontology$")
     public void loadOntologyFromUrl(String url) throws Throwable {
         ontology = manager.loadOntology(IRI.create(url));
-        IOR = IRI.create("http://home.mit.bme.hu/~fandrew/integralt/szepmuveszeti-dbpedia.2017-03-10.owl");
+        IOR = IRI.create(url);
     }
 
     @When("^Merge ontology with (.*) ontology$")
@@ -64,6 +66,25 @@ public class CucumberStepDefinitions {
         manager.applyChange(removeAxiom);
     }
 
+    @When("^Add the (.*) class as disjoint class with LCD class$")
+    public void addDisjointClassesWithAxiom(String newClassName) {
+        OWLDataFactory factory = ontology.getOWLOntologyManager().getOWLDataFactory();
+        OWLClass classLCD = factory.getOWLClass(IRI.create(IOR + "#LCD" ));
+        OWLClass newClass = factory.getOWLClass(IRI.create(IOR + "#" + newClassName ));
+        OWLAxiom axiom = factory.getOWLDisjointClassesAxiom(classLCD, newClass);
+        AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+        manager.applyChange(addAxiom);
+    }
+
+    @When("^Remove the (.*) class with its axioms as well")
+    public void deleteDisjointClassesWithAxiom(String deleteClassName) {
+        OWLDataFactory factory = ontology.getOWLOntologyManager().getOWLDataFactory();
+        OWLClass deleteClass = factory.getOWLClass(IRI.create(IOR + "#" + deleteClassName ));
+        OWLEntityRemover remover = new OWLEntityRemover(ontology);
+        remover.visit(deleteClass);
+        manager.applyChanges(remover.getChanges());
+    }
+
     @Then("^Merged ontology has (\\d+) axioms$")
     public void mergedHasAxioms(int axiomsCount) {
         assertThat(mergedOntology.getAxiomCount(), equalTo(axiomsCount));
@@ -84,4 +105,11 @@ public class CucumberStepDefinitions {
         assertThat(Objects.requireNonNull(manager.getOntologyFormat(ontology)).getKey(), equalTo(format));
     }
 
+    @Then("^LCD class has (\\d+) disjoint class$")
+    public void hasDisjointClasses(long disjointCount) {
+        OWLDataFactory factory = ontology.getOWLOntologyManager().getOWLDataFactory();
+        OWLClass classLCD = factory.getOWLClass(IRI.create(IOR + "#LCD" ));
+        long lcdDisjoint = ontology.disjointClassesAxioms(classLCD).count();
+        assertThat(lcdDisjoint, equalTo(disjointCount));
+    }
 }
