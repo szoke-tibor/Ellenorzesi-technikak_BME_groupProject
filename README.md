@@ -1,3 +1,18 @@
+# Ellenorzesi-technikak_BME_groupProject
+
+* Félév: 6.
+* Nyelv: Java
+* **Elsajátított tudás:**
+  * Csapatban való működés
+  * Manuális kódvizsgálat
+  * Statikus analízis
+  * CI alapvető funkciói
+  * Viselkedésalapú fejlesztés - *Cucumber*
+  * Git verziókezelő használata
+
+======
+# Original README
+======
 # OWLAPI
 ======
 
